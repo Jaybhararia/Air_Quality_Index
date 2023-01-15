@@ -41,7 +41,7 @@ class _Loading_Screen_StateState extends State<Loading_Screen_State> {
   }
 
   void getdata() async {
-    String apiKey = 'bb3cb61ef8c6a2e4bbadef80bcbf22eb';
+    String apiKey = 'appid (will be updated later)';
 
     https.Response responseaqi = await https.get(Uri.parse(
         'https://api.openweathermap.org/data/2.5/air_pollution/forecast?lat=$latitude&lon=$longitude&appid=$apiKey&units=metric'));
