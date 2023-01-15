@@ -1,6 +1,6 @@
-# aqi_flutter
+# Air Quality Index
 
-A new Flutter project.
+This Application gives the Air Quality Index fetched from openweathermap api, it also tells temperature, humidity, levels of NO2 and PM 2.5 about your location using latitudes and longitudes. 
 
 ## Getting Started
 
