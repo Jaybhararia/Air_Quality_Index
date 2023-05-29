@@ -13,37 +13,57 @@ const newstyle = TextStyle(
 );
 
 const bottomstyle = TextStyle(
-  // fontFamily: 'Short',
+  fontFamily: 'Short',
   fontWeight: FontWeight.bold,
-  fontSize: 35,
+  fontSize: 25,
   color: Colors.black,
 );
 
 const bottomstylenumber = TextStyle(
-  // fontFamily: 'Short',
+  fontFamily: 'Short',
   fontWeight: FontWeight.bold,
-  fontSize: 35,
+  fontSize: 50,
   color: Colors.black,
 );
 
 const bottomunit = TextStyle(
-  // fontFamily: 'Short',
+  fontFamily: 'Short',
   fontWeight: FontWeight.w300,
   fontSize: 15,
   color: Colors.black,
 );
 
-class Aqi_screen extends StatefulWidget {
+class AQI extends StatefulWidget {
   final locationweather;
   final locationaqi;
 
-  Aqi_screen({required this.locationweather, required this.locationaqi});
+  AQI({required this.locationweather, required this.locationaqi});
 
   @override
-  State<Aqi_screen> createState() => _Aqi_screenState();
+  State<AQI> createState() => _AQIState();
 }
 
-class _Aqi_screenState extends State<Aqi_screen> {
+class _AQIState extends State<AQI> {
+
+  Map<double, Color> valueColorMap = {
+    1: Colors.green,
+    2: Colors.greenAccent,
+    3: Colors.orange,
+    4: Colors.deepOrange,
+    5: Colors.red,
+  };
+
+  Color getProgressColor(double value) {
+    Color? progressColor;
+    for (var key in valueColorMap.keys) {
+      if (value == key) {
+        progressColor = valueColorMap[key];
+        break;
+      }
+    }
+    return progressColor ?? Colors.red;
+  }
+  
   var temp;
   var humidity;
   var aqi;
@@ -73,34 +93,19 @@ class _Aqi_screenState extends State<Aqi_screen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-
-        // appBar: AppBar(
-        //   title: Center(
-        //     child: const Text(
-        //       'Air Quality Index',
-        //       style: TextStyle(
-        //         color: Colors.white,
-        //         fontWeight: FontWeight.bold,
-        //       ),
-        //     ),
-        //   ),
-        // ),
-        body: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                colors: [
-                  Color(0xFFf3d245),
-                  Color(0xFFea7c43),
-
-                  // Color(0xFFad2b90),
-                  // Color(0xFF4e3aad),
-                  // Colors.white,
-
-                ],
-              )
+        appBar: AppBar(
+          title: Center(
+            child: const Text(
+              'Air Quality Index',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
+        ),
+        body: Container(
+          color: Color.fromARGB(255, 61, 103, 178),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -115,8 +120,8 @@ class _Aqi_screenState extends State<Aqi_screen> {
                     lineWidth: 12.0,
                     percent: aqi * 0.2,
                     // progressColor: Color.fromARGB(255, 166, 208, 87),
-                    progressColor: aqi > 3 ? Colors.red : Colors.greenAccent,
-                    // backgroundColor: Color(0xff406fbf),
+                    progressColor: getProgressColor(aqi),
+                    backgroundColor: Color(0xff406fbf),
                     circularStrokeCap: CircularStrokeCap.round,
                     animation: true,
                     animateFromLastPercent: true,
@@ -132,7 +137,7 @@ class _Aqi_screenState extends State<Aqi_screen> {
               Expanded(
                 flex: 1,
                 child: Container(
-                  // color: Color.fromARGB(255, 61, 103, 178),
+                  color: Color.fromARGB(255, 61, 103, 178),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -183,7 +188,7 @@ class _Aqi_screenState extends State<Aqi_screen> {
                       topLeft: Radius.circular(50),
                       topRight: Radius.circular(50),
                     ),
-                    color: Colors.green.shade300,
+                    color: Colors.white,
                   ),
                   child: Padding(
                     padding: EdgeInsets.all(30),
